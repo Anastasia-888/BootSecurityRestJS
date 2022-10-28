@@ -1,7 +1,6 @@
 package com.example.springbootrest.controller;
 
 import com.example.springbootrest.model.User;
-import com.example.springbootrest.service.interfaces.RoleService;
 import com.example.springbootrest.service.interfaces.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +13,9 @@ import java.util.List;
 public class AdminRestController {
 
     private final UserService userService;
-    private final RoleService roleService;
 
-    public AdminRestController(UserService userService, RoleService roleService) {
+    public AdminRestController(UserService userService) {
         this.userService = userService;
-        this.roleService = roleService;
     }
 
     @GetMapping("/all_users")
@@ -39,14 +36,11 @@ public class AdminRestController {
 
     @PutMapping("/edit")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-
         User currentUser = userService.findById(user.getId());
-        System.out.println(user);
 
         if (user.getRoles() == null) {
             user.setRoles(currentUser.getRoles());
         }
-
         user.setPassword(currentUser.getPassword());
         userService.update(user);
         return new ResponseEntity<>(user, HttpStatus.OK);

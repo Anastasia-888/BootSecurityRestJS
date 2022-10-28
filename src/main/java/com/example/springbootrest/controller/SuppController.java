@@ -6,7 +6,6 @@ import com.example.springbootrest.model.User;
 import com.example.springbootrest.service.interfaces.RoleService;
 import com.example.springbootrest.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -29,7 +28,6 @@ public class SuppController {
         this.roleService = roleService;
     }
 
-    @Secured(value = {"ROLE_ADMIN"})
     @GetMapping("/admin")
     public String findAll(Model model, ModelMap modelMap, Principal principal) {
         modelMap.addAttribute("current_user", userService.findByEmail(principal.getName()));
@@ -56,7 +54,6 @@ public class SuppController {
                     "admin", adminRoles);
             userService.saveUser(admin);
         }
-
         return "login";
     }
 }
