@@ -34,13 +34,13 @@ public class SuppController {
         return "admin/user-list";
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public String userPage(Principal principal, ModelMap modelMap) {
         modelMap.addAttribute("current_user", userService.findByEmail(principal.getName()));
         return "user";
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String loginPage() {
 
         if (roleService.findAll().isEmpty()) {
