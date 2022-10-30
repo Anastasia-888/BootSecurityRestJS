@@ -29,8 +29,8 @@ public class SuppController {
     }
 
     @GetMapping("/admin")
-    public String findAll(Model model, ModelMap modelMap, Principal principal) {
-        modelMap.addAttribute("current_user", userService.findByEmail(principal.getName()));
+    public String findAll(Model model, Principal principal) {
+        model.addAttribute("current_user", userService.findByEmail(principal.getName()));
         return "admin/user-list";
     }
 
