@@ -42,7 +42,7 @@ public class AdminRestController {
             user.setRoles(currentUser.getRoles());
         }
         user.setPassword(currentUser.getPassword());
-        userService.update(user);
+        userService.update(user, user.getId());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -50,6 +50,5 @@ public class AdminRestController {
     public void deleteUser(@PathVariable long id) {
         userService.deleteById(id);
     }
-
 
 }
